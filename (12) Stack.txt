@@ -1,0 +1,54 @@
+#include<iostream>
+#include<string.h>
+#include<list>
+using namespace std;
+class stack{
+    public:
+    int a;
+    list<int>s;
+    list<int>::iterator itr;
+    void push(){
+        cout<<"\n enter the element:";
+        cin>>a;
+        s.push_back(a);
+    }
+    void display(){
+        cout<<"\nElements in stack:";
+        for(itr=s.begin();itr!=s.end();itr++)
+        {
+            cout<<*itr<<"\t";
+        }
+    }
+    void pop(){
+        itr=s.end();
+        itr--;
+        s.pop_back();
+        cout<<"\n the deleted element is:"<<*itr;
+    }
+    
+};
+int main(){
+    stack p;
+    int choice;
+    char ans;
+    do
+    {
+        cout<<"\n1.insert element\n2.delete element\n3. display";
+        cout<<"\nenter operation which want to perform\n";
+        cin>>choice;
+        switch(choice){
+            case 1:
+            p.push();
+              break;
+            case 2:
+            p.pop();
+              break;
+            case 3:
+            p.display();
+              break;
+        }
+        cout<<"\nDo you want to continue (Y/N):";
+        cin>>ans;
+        
+    }while(ans=='Y'||ans=='y');
+}

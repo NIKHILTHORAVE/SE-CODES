@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+class cpparray{
+    int a[10],i,j,n,b[10],temp;
+public:
+void get();
+void print();
+void sort();
+void range();
+void exchange();
+int size();
+};
+void cpparray::get(){
+    cout<<"enter limit of array";
+    cin>>n;
+    cout<<"enter the element in array";
+    for(i=0;i<n;i++){
+        cout<<"\na["<<i<<"]=";
+        cin>>a[i];
+    }
+}
+void cpparray::print(){
+    cout<<"\nthe entered array is";
+    for(i=0;i<n;i++){
+       cout<<"\na["<<i<<"]="<<a[i];
+    }
+}
+void cpparray::range(){
+    cout<<"\nthe range is from"<<a[0]<<"to"<<a[n-1];
+}
+void cpparray::exchange(){
+    for(i=0;i<n;i++){
+        b[i]=a[i];
+        
+    }
+    cout<<"\nthe exchange array is";
+    for(i=0;i<n;i++){
+        cout<<"\nb["<<i<<"]="<<b[i];
+    }
+}
+void cpparray::sort(){
+    for(i=0;i<n-1;i++){
+        for(j=i+1;j<n;j++){
+            if(a[i]>a[j]){
+                temp=a[i];
+                a[i]=a[j];
+                a[j]=temp;
+            }
+        }
+    }
+    cout<<"\nthe sorted array is:";
+    for(i=0;i<n;i++){
+        cout<<"\na["<<i<<"]="<<a[i];
+    }
+}
+int cpparray::size(){
+    return n;
+}
+
+
+int main(){
+    cpparray obj;
+    int a;
+    obj.get();
+    obj.print();
+    obj.range();
+    obj.exchange();
+    obj.sort();
+    a=obj.size();
+    cout<<"\nthe size:"<<a;
+}
