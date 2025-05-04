@@ -1,0 +1,140 @@
+
+#include<iostream>
+#include<string.h>
+using namespace std;
+class Hashfunction
+{
+    typedef struct hash{
+        char name[100];
+        long key;
+    }hash;
+    hash h[10];
+    public:
+    Hashfunction();
+    void insert();
+    void del(long);
+    int find(long);
+    void display();
+};
+Hashfunction::Hashfunction()
+{
+    for(int i=0;i<10;i++)
+    {
+        h[i].key=-1;
+        strcpy(h[i].name,"NULL");
+    }
+}
+void Hashfunction::del(long k)
+{
+    int index=find(k);
+    if(index==-1){
+        cout<<"\n hash table is empty";
+
+    }
+    else
+    {
+        h[index].key=-1;
+        strcpy(h[index].name,"NULL");
+        cout<<"\n key is deleted";
+    }
+    
+    
+}
+void Hashfunction::display()
+{
+    cout<<"\n\t\tkey\t\tname\t";
+    for(int i=0;i<10;i++)
+    {
+        cout<<"\n\th["<<i<<"]\t"<<h[i].key<<"\t\t"<<h[i].name;
+    }
+}
+int Hashfunction::find(long k)
+{
+   for(int i=0;i<10;i++)
+   {
+    if(h[i].key==k)
+    {
+        cout<<h[i].key<<" is found at location "<<i<<" with name "<<h[i].name;
+    }
+   }
+  return 0; 
+}
+void Hashfunction::insert()
+{
+    int cnt=0;
+    char ans ,name[100];
+    long key;
+    do{
+        if(cnt>=10)
+        {
+            cout<<"\n hash table is full ";
+            break;
+        }
+        
+        cout<<"\nEnter the telephone number : ";
+        cin>>key;
+        cout<<"\n Enter the name : ";
+        cin>>name;
+        int index=key%10;
+        bool inserted=false;
+
+        for(int i=0;i<10;i++)
+        {
+            int idx=(index+i)%10;
+            if(h[idx].key==-1)
+            {
+                h[idx].key=key;
+                strcpy(h[idx].name,name);
+                inserted=true;
+                break;
+            }
+
+        }
+        if(inserted)
+        {
+            cnt++;
+        }
+        else
+        {
+            cout<<"\n no space ";
+        }
+        cout<<"\n Do you want to continue : ";
+        cin>>ans;
+    }while(ans=='y'|| ans=='Y');
+
+}
+int main()
+{
+    int ch;
+    int index;
+    long k;
+    char as;
+    Hashfunction obj;
+    do {
+        cout<<"\n1.insert\n2.display\n3.delete\n4.find\n Enter the choice ";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1: 
+                obj.insert();
+                break;
+            case 2:
+                obj.display();
+                break;
+            case 3:
+                cout<<"\n Enter the key you want to delete : ";
+                cin>>k;
+                obj.del(k);
+                break;
+            case 4:
+                cout<<"\n Enter key to find : ";
+                cin>>k;
+                index = obj.find(k);
+                break;
+            default:
+                cout << "\nInvalid choice!";
+        }
+        cout<<"\nDo you want to continue (y/n)? ";
+        cin>>as;
+    } while(as == 'y' || as == 'Y');
+}
